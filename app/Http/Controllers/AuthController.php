@@ -16,13 +16,15 @@ class AuthController extends Controller{
         $request->validate([
             'name'=>'required|string|max:255',
             'email'=>'required|email|unique:users',
-            'password'=>'required|min:6|confirmed'
+            'password'=>'required|min:6|confirmed',
+            'role' => 'in:user,admin'
         ]);
 
         $users = User::create([
             'name'=> $request->name,
             'email'=>$request->email,
-            'password'=>Hash::make($request->password)
+            'password'=>Hash::make($request->password),
+            'role' => $request->role ?? 'user'
         ]);
         Auth::login($users);
         return redirect()->route('dashboard');

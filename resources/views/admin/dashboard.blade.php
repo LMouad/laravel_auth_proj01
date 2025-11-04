@@ -1,0 +1,1 @@
+<h2>Welcome, {{ Auth::user()->name }} U Are Admin This Is Ur Dashboard</h2>
